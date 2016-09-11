@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Empleados</title>
+</h:head> 
+<h:body style="font-size:13px!important">
+	<p:growl id="growl"/>
+	<h:form>
+		<h:panelGrid cellspacing="15">
+			<p:outputLabel value="Empleados" style="font-size:25px!important;"/>
+			<p:commandButton	value="Agregar Empleado"
+												action="#{empleadoMB.nuevo()}" 
+												icon="fa fa-plus-circle"/>
+			<p:dataTable	id="empleadosTable"
+										value="#{empleadoMB.empleados}"
+										var="emp"
+										emptyMessage="No hay registros que mostrar."
+										rowIndexVar="item"
+										paginator="true"
+										paginatorPosition="top"
+										rowsPerPageTemplate="10,20,30,40,50"
+										rowKey="#{emp.id}">
+				<p:column headerText="Nombres">
+					<h:outputText value="#{emp.nombres}"/>
+				</p:column>
+				<p:column headerText="Apellidos">
+					<h:outputText value="#{emp.apellidos}"/>
+				</p:column>
+				<p:column headerText="Direccion">
+					<h:outputText value="#{emp.direccion}"/>
+				</p:column>
+				<p:column headerText="Pais">
+					<h:outputText value="#{emp.pais}"/>
+				</p:column>
+				<p:column headerText="Opciones">
+					<p:commandButton	value="Editar" 
+														action="#{empleadoMB.modificar(emp)}" 
+														icon="fa fa-pencil"
+														ajax="false"/>
+					<p:commandButton	value="Eliminar" 
+														update=":growl"
+														actionListener="#{empleadoMB.eliminar(emp)}"
+														icon="fa fa-minus-circle">
+						<p:confirm header="Eliminar" message="¿Esta seguro de eliminar?" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+    	<p:spacer width="20"/>
+       <p:commandButton value="SI, ELIMINAR" type="button" styleClass="ui-confirmdialog-yes red-button" icon="fa fa-check" />
+       <p:commandButton value="NO" type="button" styleClass="ui-confirmdialog-no white-button" icon="fa fa-close" />
+    </p:confirmDialog>
+		
+	</h:form>
+</h:body> 
+</html>

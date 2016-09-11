@@ -1,0 +1,31 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Empleados</title>
+</h:head> 
+<h:body style="font-size:13px!important">
+	<h:form>
+		<h:panelGrid cellspacing="5">
+			<p:outputLabel value="Empleados" style="font-size:25px!important;"/>
+			<p:separator/>
+			<p:outputLabel for="nombre" value="Nombres"/>
+			<p:inputText id="nombre" value="#{empleadoMB.empleado.nombres}" size="50"/>
+			<p:outputLabel for="apellidos" value="Apellidos"/>
+			<p:inputText id="apellidos" value="#{empleadoMB.empleado.apellidos}" size="50"/>
+			<p:outputLabel for="direccion" value="Direccion"/>
+			<p:inputText id="direccion" value="#{empleadoMB.empleado.direccion}" size="50"/>
+			<p:outputLabel for="pais" value="Pais"/>
+			<p:inputText id="pais" value="#{empleadoMB.empleado.pais}"/>
+			<p:separator/>
+		</h:panelGrid>
+		<p:separator/>
+		<p:commandButton value="GUARDAR" action="#{empleadoMB.guardar()}" ajax="false" />
+		<p:commandButton value="Cancelar" action="empleados" process="@this" />
+	</h:form>
+</h:body> 
+</html>
